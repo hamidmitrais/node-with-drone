@@ -1,10 +1,12 @@
-var express = require('express')
-var app = express()
+const express = require('express')
+const http = require("http")
+const router = require('./routes/main.js')
 
-app.get('/', function(req, res) {
-    res.send('Hello world')
-})
+const app = express()
 
-app.listen(3000, function() {
-    console.log('App listening on port 3000')
-})
+app.use('/', router)
+
+app.set('port', '3000')
+
+const server = http.createServer(app)
+server.listen(3000)

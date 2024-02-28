@@ -13,6 +13,22 @@ steps:
   commands:
   - npm test
 
+- name: hello main
+  image: alpine
+  commands:
+  - echo "Hello main"
+  when:
+    branch:
+    - main
+
+- name: hello dev
+  image: alpine
+  commands:
+  - echo "Hello dev"
+  when:
+    branch:
+    - dev
+
 trigger:
   event:
   - push

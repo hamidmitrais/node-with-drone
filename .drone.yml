@@ -28,6 +28,8 @@ steps:
   when:
     branch:
     - dev
+    event:
+    - pull_request
 
 trigger:
   event:

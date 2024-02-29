@@ -27,7 +27,7 @@ steps:
   - echo "Hello dev"
   when:
     branch:
-    - main
+    - dev
 
 trigger:
   event:

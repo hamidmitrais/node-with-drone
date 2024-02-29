@@ -3,32 +3,21 @@ type: docker
 name: default
 
 steps:
-- name: build
-  image: node
-  commands:
-  - npm install
+  - name: install pkg
+    image: node:alpine
+    commands:
+    - npm i
+  
+  - name: unit tests
+    image: node:alpine
+    commands:
+    - npm test
 
-- name: unit test
-  image: node
-  commands:
-  - npm test
-
-- name: hello main
-  image: alpine
-  commands:
-  - echo "Hello main"
-  when:
-    branch:
-    - main
-
-- name: hello dev
-  image: alpine
-  commands:
-  - echo "Hello dev"
-  when:
-    branch:
-    - dev
-
-trigger:
-  event:
-  - push
+  - name: secrets
+    image: alpine
+    environment:
+      SECRET_TEXT:
+        from_secret: SECRET_TEXT
+    commands:
+    - echo $SECRET_TEXT > .env
+    - cat .env
